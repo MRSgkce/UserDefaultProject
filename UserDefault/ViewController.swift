@@ -16,34 +16,47 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // UserDefaults'tan verileri al
-                if let kaydedilenNot = UserDefaults.standard.string(forKey: "not") {
-                    NotLabel.text = "yapılacak iş: \(kaydedilenNot)"
-                }
-                
-                if let kaydedilenZaman = UserDefaults.standard.string(forKey: "zaman") {
-                    zamanLabel.text = "yapılacak zaman: \(kaydedilenZaman)"
-                }
+        if let kaydedilenNot = UserDefaults.standard.string(forKey: "not") {
+            NotLabel.text = "yapılacak iş: \(kaydedilenNot)"
+        }
+        
+        if let kaydedilenZaman = UserDefaults.standard.string(forKey: "zaman") {
+            zamanLabel.text = "yapılacak zaman: \(kaydedilenZaman)"
+        }
     }
     
     @IBAction func kaydet(_ sender: Any) {
         // UITextField'in metin özelliklerini UserDefaults'a kaydet
-                if let notText = NotTextField.text {
-                    UserDefaults.standard.setValue(notText, forKey: "not")
-                }
-                
-                if let zamanText = zamanTextField.text {
-                    UserDefaults.standard.setValue(zamanText, forKey: "zaman")
-                }
-                
-                // Label'ları güncelle
-                NotLabel.text = "yapılacak iş: \(NotTextField.text ?? "")"
-                zamanLabel.text = "yapılacak zaman: \(zamanTextField.text ?? "")"
-            }
+        if let notText = NotTextField.text {
+            UserDefaults.standard.setValue(notText, forKey: "not")
+        }
         
+        if let zamanText = zamanTextField.text {
+            UserDefaults.standard.setValue(zamanText, forKey: "zaman")
+        }
+        
+        // Label'ları güncelle
+        NotLabel.text = "yapılacak iş: \(NotTextField.text ?? "")"
+        zamanLabel.text = "yapılacak zaman: \(zamanTextField.text ?? "")"
+    }
+    
     
     
     @IBAction func sil(_ sender: Any) {
-    }
+        // UserDefaults'tan verileri sil
+                UserDefaults.standard.removeObject(forKey: "not")
+                UserDefaults.standard.removeObject(forKey: "zaman")
+                
+                // Label'ları temizle
+                NotLabel.text = "yapılacak iş: "
+                zamanLabel.text = "yapılacak zaman: "
+                
+                // TextField'ları temizle
+                NotTextField.text = ""
+                zamanTextField.text = ""
+            
+        }
+        
+    
     
 }
-
